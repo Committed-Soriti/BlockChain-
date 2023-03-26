@@ -1,28 +1,19 @@
-REMIX DEFAULT WORKSPACE
+Описание контракта CarRegistratiom.sol
 
-Remix default workspace is present when:
-i. Remix loads for the very first time 
-ii. A new workspace is created with 'Default' template
-iii. There are no files existing in the File Explorer
+Конечная цель смарт-контракта будет в том, чтобы добавить и вести учет автомобилей в автосерсисе. Для этого нужно создать контракт, который будет принимать данные о машине и добавлять их в реестр.
 
-This workspace contains 3 directories:
+Код контракта создает структуру Car, которая содержит информацию о машине, такую как марка, модель, год выпуска, адрес владельца, VIN номер и дата следующей записи в автосерсис. Затем создается хранилище registeredCars, которое связывает адрес владельца с информацией о его машине. Функция registerCar позволяет владельцу машины зарегистрировать ее в реестре. Функция проверяет, что машина еще не зарегистрирована, создает новую запись о машине и добавляет ее в реестр.
 
-1. 'contracts': Holds three contracts with increasing levels of complexity.
-2. 'scripts': Contains four typescript files to deploy a contract. It is explained below.
-3. 'tests': Contains one Solidity test file for 'Ballot' contract & one JS test file for 'Storage' contract.
+Контракт должен иметь функцию transferOwnership() для передачи прав владения автомобилем другому пользователю. Если владелец продает свой автомобиль, новый владелец сможет обновить запись в реестре и продолжить отслеживать статус ремонта.
 
-SCRIPTS
+Ключевой функцией контракта является запись в автосервис bookServiceOnDate(), которая регистрирует автомобиль на ремонт в автосервисе и назначает дату проведения ремонта.
 
-The 'scripts' folder has four typescript files which help to deploy the 'Storage' contract using 'web3.js' and 'ethers.js' libraries.
+Затем, для каждого автомобиля, необходимо создать функции, которые будут добавлять и содержать информацию о проведенных ремонтных работ addRepair(), статусе платежа и сумму платежа за ремонт. Контракт также должен иметь функцию для проверки статуса оплаты ремонта и была ли оплата за услуги произведена payRepair(). Владелец автомобиля сможет использовать эту функцию для отслеживания количества работ по машине, какие из них оплачены и их стоимость getRepairsCount().
 
-For the deployment of any other contract, just update the contract's name from 'Storage' to the desired contract and provide constructor arguments accordingly 
-in the file `deploy_with_ethers.ts` or  `deploy_with_web3.ts`
-
-In the 'tests' folder there is a script containing Mocha-Chai unit tests for 'Storage' contract.
-
-To run a script, right click on file name in the file explorer and click 'Run'. Remember, Solidity file must already be compiled.
-Output from script will appear in remix terminal.
-
-Please note, require/import is supported in a limited manner for Remix supported modules.
-For now, modules supported by Remix are ethers, web3, swarmgw, chai, multihashes, remix and hardhat only for hardhat.ethers object/plugin.
-For unsupported modules, an error like this will be thrown: '<module_name> module require is not supported by Remix IDE' will be shown.
+Скрины
+Код
+![image](https://user-images.githubusercontent.com/128974407/227776816-67bfe393-4884-473a-ab68-2bd129d5a195.png)
+Deploy Contracts
+![image](https://user-images.githubusercontent.com/128974407/227776880-d2aeec69-1d14-4927-a4b0-abb73a922b2f.png)
+Ganache
+![image](https://user-images.githubusercontent.com/128974407/227776733-08ec1100-9a04-4eb7-82f6-21062a05c909.png)
